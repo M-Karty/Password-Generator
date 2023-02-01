@@ -1,17 +1,18 @@
 import random
+import easygui as eg
+from easygui import *
+import os
 
 
 def randPass():
 
-    print("Random Password Generation")
+    title = "Random Password Generation"
+    x = enterbox("How long do you want your generated password to be?")
+
+    value = str(x)
 
     symbols = "default"
     numbers = "default"
-
-    error = "False"
-
-    passlen = int(input('How long do you want your password?: '))
-    print('\n')
 
     print("Answer with yes/no")
     passAskSym = input('Include symbols?: ')
@@ -44,22 +45,22 @@ def randPass():
 
     if numbers == 'yes' and symbols == 'no':
         default = randLower + randUpper + randNumber
-        pickRandom = "".join(random.sample(default, passlen))
+        pickRandom = "".join(random.sample(default, int(value)))
         print("Password: " + pickRandom)
 
     if numbers == 'yes' and symbols == 'yes':
         default = randLower + randUpper + randNumber + randSymbol
-        pickRandom = "".join(random.sample(default, passlen))
+        pickRandom = "".join(random.sample(default, int(value)))
         print("Password: " + pickRandom)
 
     if numbers == 'no' and symbols == 'no':
         default = randLower + randUpper
-        pickRandom = "".join(random.sample(default, passlen))
+        pickRandom = "".join(random.sample(default, int(value)))
         print("Password: " + pickRandom)
 
     if numbers == 'no' and symbols == 'yes':
         default = randLower + randUpper + randSymbol
-        pickRandom = "".join(random.sample(default, passlen))
+        pickRandom = "".join(random.sample(default, int(value)))
         print("Password: " + pickRandom)
 
 
