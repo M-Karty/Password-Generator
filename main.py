@@ -3,65 +3,64 @@ import easygui as eg
 from easygui import *
 import os
 
-
 def randPass():
+    
+    def passwordLength():
+        global value, title1, enterBox
+        
+        title1 = "Random Password Generation"
+        enterBox = enterbox("How long do you want your generated password to be?")
+        value = str(enterBox)
+        
+    passwordLength()
 
-    title = "Random Password Generation"
-    x = enterbox("How long do you want your generated password to be?")
-
-    value = str(x)
-
-    symbols = "default"
-    numbers = "default"
-
-    print("Answer with yes/no")
-    passAskSym = input('Include symbols?: ')
-    if passAskSym == 'yes' or passAskSym == 'Yes':
-        symbols = "yes"
-        print("User Entered Yes\n")
-    if passAskSym == 'no' or passAskSym == 'No':
-        symbols = "no"
-        print("User Entered No\n")
-    else:
-        error = "True"
-
-    print("Answer with yes/no")
-    passAskNum = input('Include numbers?: ')
-    if passAskNum == 'yes' or passAskNum == 'Yes':
-        numbers = "yes"
-        print("User entered yes\n")
-    if passAskNum == 'no' or passAskNum == 'No':
-        numbers = "no"
-        print("User entered no\n")
-    else:
-        error = "True"
-
+    def choiceBox():
+        global reply, title2
+        title2 = "Random Password Generation"
+        msg = "Do you want to use symbols, numbers or both?"
+        choices = ["Symbols", "Numbers", "Both", "None"]
+        reply = choicebox(msg, title2, choices)
+    choiceBox()
+    
     randLower = "abcdefghijklmnopqrstuvwxyz"
     randUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     randNumber = "01234567890"
     randSymbol = "!@#$^&*()?"
-
+    
     default = randLower + randUpper
-
-    if numbers == 'yes' and symbols == 'no':
-        default = randLower + randUpper + randNumber
+    
+    password = ""
+    
+    if reply == "Symbols":
+        print("Symbols")
+        default = default + randSymbol
         pickRandom = "".join(random.sample(default, int(value)))
-        print("Password: " + pickRandom)
+        password = pickRandom
 
-    if numbers == 'yes' and symbols == 'yes':
-        default = randLower + randUpper + randNumber + randSymbol
+    if reply == "Numbers":
+        print("Numbers")
+        default = default + randNumber
         pickRandom = "".join(random.sample(default, int(value)))
-        print("Password: " + pickRandom)
-
-    if numbers == 'no' and symbols == 'no':
-        default = randLower + randUpper
+        password = pickRandom
+        
+    if reply == "Both":
+        print("Both")
+        default = default + randSymbol + randNumber
         pickRandom = "".join(random.sample(default, int(value)))
-        print("Password: " + pickRandom)
+        password = pickRandom
 
-    if numbers == 'no' and symbols == 'yes':
-        default = randLower + randUpper + randSymbol
+    if reply == "None":
+        print("None")
+        default = default
         pickRandom = "".join(random.sample(default, int(value)))
-        print("Password: " + pickRandom)
+        password = pickRandom
+    
+    def finalPassword():
+        global title3
+        title3 = "Random Password Generation"
+        msgbox("Password: " + password) 
 
-
+    finalPassword()
 randPass()
+    
+    
