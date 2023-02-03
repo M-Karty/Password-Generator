@@ -1,7 +1,6 @@
 import random
 import easygui as eg
 from easygui import *
-import os
 
 def randPass():
     
